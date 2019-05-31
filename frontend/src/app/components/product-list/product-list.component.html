@@ -1,0 +1,15 @@
+<div class="">
+    <div class="card-columns">
+        <div *ngFor="let product of productService.productsFiltered" class="card-content">
+            <app-product  [product]="product"></app-product>
+        </div>
+    </div>
+    <div class="cart-button-container">
+        <a class="text-white card-button" [routerLink]="['/shoppingCart']">
+            <i class="fa fa-shopping-cart"></i> 
+            <span>
+                {{ shoppingCartService.cart.length }}
+            </span>
+        </a>
+    </div>
+</div>

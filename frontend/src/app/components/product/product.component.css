@@ -1,0 +1,33 @@
+.card{
+    box-shadow: 10px 8px 15px -10px rgba(0,0,0,0.75);
+    border: none;
+}
+.btn-cart{
+    width: 100%;
+    background: rgb(252, 103, 103);
+    color: white;
+    border-radius: 60px;
+    border: none;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+.btn-cart-icon{
+    background-color: white;
+    color: rgb(252, 103, 103);
+    border-radius: 50%;
+    padding: 2px 12px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.btn-cart-text{
+    padding: 6px;
+}
+.btn-cart:disabled {
+    color: gray;
+    background-color: #cecccc  !important;
+}
+.img-disabled{
+    filter: grayscale(100%);
+}

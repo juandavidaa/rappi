@@ -1,0 +1,8 @@
+.main-container{
+    justify-content: space-between;
+}
+.product-list{
+    width: calc(100% - 320px);
+    margin: 0px 40px;
+    flex-grow: 1; 
+}

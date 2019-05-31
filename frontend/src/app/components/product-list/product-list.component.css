@@ -1,0 +1,34 @@
+.card-columns{
+    margin-top: 50px;
+    padding-top: 50px;
+}
+
+@media (min-width: 780px){
+    .card-columns {
+        column-count: 3;
+    }
+}
+@media (min-width: 520px) and (max-width: 779px){
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+.card-content{
+    padding: 10px;
+}
+.cart-button-container{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 40px;
+    background-color: #17a2b8;
+    border-radius: 60px;
+}
+.card-button{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 8px;
+}

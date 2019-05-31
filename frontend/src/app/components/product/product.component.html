@@ -1,0 +1,15 @@
+<div class="card" style="margin-top:10px">
+  <img class="card-img-top" src="http://lorempixel.com/200/100/food/" alt="" [ngClass]="{'img-disabled': !product.available}">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <div>
+      <p class="text-muted">{{ product.price }} <span class="text-muted" *ngIf="!product.available">- Agotado</span></p> 
+
+      <button class="btn-cart" (click)="addToCart(product);" [disabled]="!product.available">
+        <div class="btn-cart-text">ADD TO CART</div>
+        <div class="btn-cart-icon"><i class="fa fa-angle-right"></i></div>
+      </button>
+    </div>
+    
+  </div>
+</div>

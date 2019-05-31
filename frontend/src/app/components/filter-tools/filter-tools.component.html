@@ -1,0 +1,88 @@
+<div class="page-wrapper chiller-theme"  [ngClass]="{'toggled': toggled}">
+  <a id="show-sidebar" class="btn btn-sm btn-dark text-white" (click)="toggleSideBar();">
+    <i class="fa" [ngClass]="{'fa-angle-right': !toggled, 'fa-angle-left': toggled}" ></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <div id="close-sidebar">
+          <i class="fa fa-filter"></i>
+          Filtros
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>General</span>
+          </li>
+          <li class="sidebar-dropdown active">
+            <a>
+              <i class="fa fa-tags"></i>
+              <span>Categories</span>
+            </a>
+            <div class="sidebar-submenu">
+              <span *ngIf="whereAmI.length > 0" class="previous-category" (click)="previousSubCategories(category)">
+                  <i class="fa fa-angle-double-left"></i>
+              </span>
+              <ul>
+                <li *ngFor="let category of tmpCategories">
+                  <div class="custom-control custom-checkbox" >
+                    <input type="checkbox" class="custom-control-input" (change)="categoryChanged($event.target.checked, category.categori_id)" [id]="category.id">
+                    <label class="custom-control-label" [for]="category.id">{{ category.name }}</label>
+                    <span class="next-category" *ngIf="category.sublevels" (click)="nextSubCategories(category)"><i class="fa fa-angle-double-right"></i></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown active">
+            <a>
+              <i class="fa fa-exchange"></i>
+              <span>Ranges</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                    <div class="">
+                        <a class="dropdown-item" *ngFor="let range of ranges" [ngClass]="{'active': range.active}" (click)="rangeSelected(range.operator); range.active = true;">{{ range.name }}</a>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div>
+                        <input type="number" #value class="form-control" (keyup)="moneyFilter(value.value)">
+                      </div>
+                </li>
+              </ul>
+                
+            </div>
+          </li>
+          <li class="header-menu">
+            <span>Extra</span>
+          </li>
+          <li class="sidebar-dropdown active">
+            <a href="#">
+              <i class="fa fa-book"></i>
+              <span>Others</span>
+            </a>
+            <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                      <select name="valoration" [(ngModel)]="valoration" (change)="valorationSelected();" class="form-control">
+                        <option value="">Seleccionar un filtro</option>
+                        <option value="best_seller">Best Seller</option>
+                        <option value="available">Available</option>
+                      </select>
+                  </li>
+                </ul>
+                  
+              </div>
+          </li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+  </nav>
+  
+</div>
+
