@@ -1,26 +1,29 @@
-<div class="cart-container">
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Picture</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Options</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of shoppingCartService.cart; let index = index">
-            <th scope="row">{{ index + 1 }}</th>
-            <td><img [src]="product.img" class="img-thumbnail" width="80"></td>
-            <td>{{product.name}}</td>
-            <td>$ {{product.price}}</td>
-            <td> 
-              <div class="options-container">
-                <a class="delete-product" (click)="removeProduct(index)"><i class="fa fa-minus text-white"></i></a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-</div>
+
+<div class="container">
+    <div class="cart-container">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of shoppingCartService.cart; let index = index">
+                <th scope="row">{{ index + 1 }}</th>
+                <td><img [src]="product.img" class="img-thumbnail" width="80"></td>
+                <td>{{product.name}}</td>
+                <td>$ {{product.price}}</td>
+                <td> 
+                  <div class="options-container">
+                    <a class="delete-product" (click)="removeProduct(index)"><i class="fa fa-minus text-white"></i></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>  

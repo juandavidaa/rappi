@@ -21,13 +21,22 @@
               <span>Categories</span>
             </a>
             <div class="sidebar-submenu">
-              <span *ngIf="whereAmI.length > 0" class="previous-category" (click)="previousSubCategories(category)">
-                  <i class="fa fa-angle-double-left"></i>
+              <span  class="previous-category animated" [ngClass]="{'slideInDown': whereAmI.length > 0, 'slideOutUp': whereAmI.length == 0}" (click)="previousSubCategories(category)">
+                  <i class="fa fa-sign-out text-white"></i>
               </span>
-              <ul>
-                <li *ngFor="let category of tmpCategories">
+              <ul class="categories" 
+                  [ngClass]="{'main-categories': whereAmI.length == 0, 'sub-categories': whereAmI.length > 0}">
+                <li 
+                  *ngFor="let category of tmpCategories" 
+                  class="animated" 
+                  [ngClass]="{
+                    'slideInRight':  !categoriesChanged && next,
+                    'slideOutLeft':  categoriesChanged && next,
+                    'slideInLeft':  !subCategoriesChanged && previous,
+                    'slideOutRight':  subCategoriesChanged && previous
+                  }">
                   <div class="custom-control custom-checkbox" >
-                    <input type="checkbox" class="custom-control-input" (change)="categoryChanged($event.target.checked, category.categori_id)" [id]="category.id">
+                    <input type="checkbox" class="custom-control-input" (change)="categoryChanged($event.target.checked, category.id)" [id]="category.id">
                     <label class="custom-control-label" [for]="category.id">{{ category.name }}</label>
                     <span class="next-category" *ngIf="category.sublevels" (click)="nextSubCategories(category)"><i class="fa fa-angle-double-right"></i></span>
                   </div>

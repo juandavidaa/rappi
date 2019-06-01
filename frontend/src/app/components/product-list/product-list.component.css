@@ -32,3 +32,11 @@
     align-items: center;
     margin-top: 8px;
 }
+.main-container{
+    display: flex;
+    justify-content: center;
+}
+.product-list{
+    flex-grow: 2;
+    padding: 20px;
+}

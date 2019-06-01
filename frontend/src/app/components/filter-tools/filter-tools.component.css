@@ -305,5 +305,23 @@
     position: absolute;
     right: 0px;
     animation: see-next 2s infinite;
+  }
+  .previous-category,  .next-category{
     cursor: pointer;
+  }
+  .previous-category i{
+    transform: rotate(180deg);
+  }
+  .previous-category{
+    padding: 13px;
+    border-bottom: solid 1px white;
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .main-categories{
+    margin-top: -50px !important;
+    
+  }
+  .categories{
+    transition: margin 600ms;
   }

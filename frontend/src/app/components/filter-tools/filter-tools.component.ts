@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
+import { type } from 'os';
 
 @Component({
   selector: 'app-filter-tools',
@@ -13,6 +14,10 @@ export class FilterToolsComponent implements OnInit {
   categories: any = [];
   tmpCategories: any = [];
   categoriesSelected: any = [];
+  categoriesChanged:boolean = false;
+  subCategoriesChanged:boolean = false;
+  next:boolean = false;
+  previous:boolean = false;
   ranges = [
     {name: 'precio mayor a', operator: '>', active: false},
     {name: 'precio menor a', operator: '<', active: true}
@@ -60,21 +65,35 @@ export class FilterToolsComponent implements OnInit {
     this.productService.valoration = this.valoration;
     this.productService.filter();
   }
-
+  changeVisibility(type){
+    this.next = type;
+    this.previous = !type;
+  }
   nextSubCategories(category){
+    console.log(this.whereAmI);
+    this.changeVisibility(true);
+    this.categoriesChanged = true;
     this.tmpCategories = category.sublevels;
-    this.whereAmI.push(category.id);
+    setTimeout(() => {
+      this.categoriesChanged = false; 
+      this.whereAmI.push(category.id);
+    }, 600)
   }
   previousSubCategories(category){
+    this.changeVisibility(false);
+    this.subCategoriesChanged = true;
     this.whereAmI.pop();
-    this.tmpCategories = this.findParent();
-    
+    setTimeout(() => {
+      this.subCategoriesChanged = false; 
+      this.tmpCategories = this.findParent();
+    }, 600)
   }
   findParent(){
+    
     let tmp = Object.assign([], this.categories);
     this.whereAmI.forEach(function(id) {
       tmp = tmp.find((category) => category.id == id);
     });
-    return tmp;
+    return tmp.sublevels? tmp.sublevels: tmp;
   }
 }
