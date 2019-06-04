@@ -4,6 +4,7 @@ presentación prueba técnica para la empresa RAPPI
  entrar en la carpeta back end y desde la terminal correr el comando 
 
 `npm install`
+
 esto ejecutara los módulos necesarios es nuestra api, seguidamente ejecutar el comando 
 
 `node app`
