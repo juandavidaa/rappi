@@ -1,29 +1,41 @@
 
 <div class="container">
-    <div class="cart-container">
+    <div class="cart-container table-responsive">
         <table class="table">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Picture</th>
                 <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
                 <th scope="col">Options</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of shoppingCartService.cart; let index = index">
+              <tr *ngFor="let product of shoppingCartService.cart; let index = index;">
                 <th scope="row">{{ index + 1 }}</th>
-                <td><img [src]="product.img" class="img-thumbnail" width="80"></td>
+                <td><img src="http://lorempixel.com/200/100/food/" class="img-thumbnail" width="80"></td>
                 <td>{{product.name}}</td>
-                <td>$ {{product.price}}</td>
+                <td><input type="number" class="form-control" [(ngModel)]="product.totalQuantity" (keyup)="shoppingCartService.saveCart()" (change)="changeProduct(product)"></td>
+                <td>{{product.price}}</td>
                 <td> 
                   <div class="options-container">
-                    <a class="delete-product" (click)="removeProduct(index)"><i class="fa fa-minus text-white"></i></a>
+                    <a class="delete-product" (click)="removeProduct(index)"><i class="fa fa-times text-white"></i></a>
                   </div>
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+                <th colspan="5" class="text-right">Total</th>
+
+                <th>$ {{shoppingCartService.total.toLocaleString()}}</th>
+                
+            </tfoot>
           </table>
+          <div>
+            <button class="btn btn-outline-success btn-lg" (click)="shoppingCartService.buy()"><i class="fa fa-shopping-cart"></i> buy</button>
+          </div>
+          
     </div>
 </div>  

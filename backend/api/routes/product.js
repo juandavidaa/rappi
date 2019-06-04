@@ -8,7 +8,7 @@ app.get('/products', async (req, res) => {
 });
 
 app.get('/products/categories', async (req, res) => {
-    let categories = req.query.categories.split(",");
+    let categories = JSON.parse(req.query.categories);
     let response = await product.getProductsByCategories(categories);
     res.send(response);
 });

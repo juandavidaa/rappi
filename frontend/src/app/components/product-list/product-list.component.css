@@ -1,6 +1,6 @@
 .card-columns{
     margin-top: 50px;
-    padding-top: 50px;
+
 }
 
 @media (min-width: 780px){
@@ -31,6 +31,7 @@
     justify-content: space-around;
     align-items: center;
     margin-top: 8px;
+    text-decoration: none;
 }
 .main-container{
     display: flex;

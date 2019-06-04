@@ -3,8 +3,8 @@
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <div>
-      <p class="text-muted">{{ product.price }} <span class="text-muted" *ngIf="!product.available">- Agotado</span></p> 
-
+      <p>in stock: {{product.quantity}} </p>
+      <p class="text-muted">{{ product.price }} <span class="text-danger" *ngIf="!product.available">- Unavailable</span></p> 
       <button class="btn-cart" (click)="addToCart(product);" [disabled]="!product.available">
         <div class="btn-cart-text">ADD TO CART</div>
         <div class="btn-cart-icon"><i class="fa fa-angle-right"></i></div>

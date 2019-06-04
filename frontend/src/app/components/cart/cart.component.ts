@@ -13,6 +13,12 @@ export class CartComponent implements OnInit {
   ngOnInit() {
   }
   removeProduct(index){
-    this.shoppingCartService.cart.splice(index,1);
+    this.shoppingCartService.removeFromCart(index);
+  }
+  changeProduct(product){
+    if(!product.totalQuantity) {
+      product.totalQuantity = 0;
+      this.shoppingCartService.saveCart();
+    }
   }
 }

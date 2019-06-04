@@ -1,13 +1,13 @@
-<div class="page-wrapper chiller-theme"  [ngClass]="{'toggled': toggled}">
-  <a id="show-sidebar" class="btn btn-sm btn-dark text-white" (click)="toggleSideBar();">
-    <i class="fa" [ngClass]="{'fa-angle-right': !toggled, 'fa-angle-left': toggled}" ></i>
+<div class="page-wrapper dark-theme"  [ngClass]="{'toggled': toggled}">
+  <a id="show-sidebar" class="btn btn-sm btn-dark text-white" (click)="toggleSideBar();" [ngClass]="{'close-filter': toggled}">
+    <i class="fa" [ngClass]="{'fa-angle-right': !toggled, 'fa-times': toggled}" ></i>
   </a>
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
-      <div class="sidebar-brand">
-        <div id="close-sidebar">
+      <div class="sidebar-filter">
+        <div id="filter-icon">
           <i class="fa fa-filter"></i>
-          Filtros
+          Filters
         </div>
       </div>
       <div class="sidebar-menu">
@@ -16,12 +16,14 @@
             <span>General</span>
           </li>
           <li class="sidebar-dropdown active">
-            <a>
-              <i class="fa fa-tags"></i>
-              <span>Categories</span>
+            <a id="categories-title">
+              <div>
+                <i class="fa fa-tags"></i>
+                <span>Categories</span>
+              </div>
             </a>
             <div class="sidebar-submenu">
-              <span  class="previous-category animated" [ngClass]="{'slideInDown': whereAmI.length > 0, 'slideOutUp': whereAmI.length == 0}" (click)="previousSubCategories(category)">
+              <span class="previous-category animated" [ngClass]="{'slideInDown': whereAmI.length > 0, 'slideOutUp invisible': whereAmI.length == 0}" (click)="previousSubCategories(category)">
                   <i class="fa fa-sign-out text-white"></i>
               </span>
               <ul class="categories" 
@@ -36,7 +38,7 @@
                     'slideOutRight':  subCategoriesChanged && previous
                   }">
                   <div class="custom-control custom-checkbox" >
-                    <input type="checkbox" class="custom-control-input" (change)="categoryChanged($event.target.checked, category.id)" [id]="category.id">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="category.checked" (change)="categoryChanged($event.target.checked, category)" [id]="category.id">
                     <label class="custom-control-label" [for]="category.id">{{ category.name }}</label>
                     <span class="next-category" *ngIf="category.sublevels" (click)="nextSubCategories(category)"><i class="fa fa-angle-double-right"></i></span>
                   </div>
@@ -52,34 +54,63 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                    <div class="">
-                        <a class="dropdown-item" *ngFor="let range of ranges" [ngClass]="{'active': range.active}" (click)="rangeSelected(range.operator); range.active = true;">{{ range.name }}</a>
+                    <label>Price</label>                    
+                </li>
+                <li class="">
+                    <div class="form-group form-inline">
+                        $
+                        <input type="number" [(ngModel)]="priceRange.higher.value" class="form-control" (keyup)="moneyFilter()">
                     </div>
-                    
-                </li>
-                <li>
                     <div>
-                        <input type="number" #value class="form-control" (keyup)="moneyFilter(value.value)">
-                      </div>
+                      to:    
+                    </div> 
+                    <div class="form-group form-inline">
+                      $
+                      <input type="number" [(ngModel)]="priceRange.lower.value" class="form-control" (keyup)="moneyFilter()">
+                    </div>
                 </li>
-              </ul>
-                
+              </ul>  
             </div>
           </li>
           <li class="header-menu">
             <span>Extra</span>
           </li>
           <li class="sidebar-dropdown active">
-            <a href="#">
+              <a id="sorting-title">
+                <i class="fa fa-book"></i>
+                <div class="sort-title">
+                    <label>Sort</label> 
+                    <span> 
+                      <i class="fa" *ngIf="sort.type" [ngClass]="{'fa-sort-amount-asc': sort.asc, 'fa-sort-amount-desc': !sort.asc}" (click)="changeShortingType()"></i>
+                    </span>
+                  </div>
+                
+              </a>
+              <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                        <select name="sort" [(ngModel)]="sort.type" (change)="sortSelected();" class="form-control">
+                          <option value="">select an sorting option</option>
+                          <option value="available">Available</option>
+                          <option value="price">Price</option>
+                          <option value="quantity">Quantity</option>
+                        </select>
+                    </li>
+                  </ul>
+                    
+                </div>
+            </li>
+          <li class="sidebar-dropdown active">
+            <a>
               <i class="fa fa-book"></i>
               <span>Others</span>
             </a>
             <div class="sidebar-submenu">
                 <ul>
                   <li>
-                      <select name="valoration" [(ngModel)]="valoration" (change)="valorationSelected();" class="form-control">
-                        <option value="">Seleccionar un filtro</option>
-                        <option value="best_seller">Best Seller</option>
+                    <label for="available">Available</label>
+                      <select [(ngModel)]="valoration" (change)="availableSelected();" name="available" class="form-control">
+                        <option value="">select a filter</option>
                         <option value="available">Available</option>
                       </select>
                   </li>

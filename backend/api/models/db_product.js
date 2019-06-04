@@ -20,28 +20,28 @@ let products = db.getData('products');
 const getProducts = () => products;
 
 // método que me filtrara todos los productos que coincidan con un nombre de producto funciona como un like de sql
-const getProductsLike = (name, products = products) => products.filter((product) => product.toLowerCase().includes(name.toLowerCase()));
+/* const getProductsLike = (name, products = products) => products.filter((product) => product.toLowerCase().includes(name.toLowerCase())); */
 
 //método encargado de filtrar productos por categorias
-const getProductsByCategories = async (categories, tmp = null) => {
-    if(!tmp) tmp = await products;
+const getProductsByCategories = async (categories) => {
+    let tmp = await products;
+    categories = categories.map((x) => parseInt(x, 10));
     return tmp.filter((product) => {
-        for (const category of categories) {
-            if(product.categories.indexOf(parseInt(category)) != -1){
-                return product;
-            }
+        if(categories.indexOf(product.sublevel_id) != -1){
+            return product;
         }
     });
 }
 
 //método encargado de filtrar los productos dependiendo de una propiedad y un operador ej: price > 30000
+/*
 const filterProducts = (field, operator, value, products = products) =>{
     return products.filter((product) => {
         if(eval(`${product[field]} ${operator} ${value}`)){
             return product;
         }
     });
-}
+}*/
 
 // método que obtiene un unico producto
 const getProduct = (id) => products.find((product) => product.id == id);
@@ -56,7 +56,7 @@ const getProduct = (id) => products.find((product) => product.id == id);
 */
 
 // método encargado de asignarme un id de insercción para un producto
-const getProductInsertId = () => {
+/* const getProductInsertId = () => {
     let id = products[products.length - 1].id;
     return ++id;
 }
@@ -98,12 +98,12 @@ const deleteProduct = async (id) => {
     return response;
 }
 
+*/
+
 
 // exportaciones que se podran usar en otros módulos
 module.exports = {
     getProducts,
     getProduct,
-    getProductsLike,
-    filterProducts,
     getProductsByCategories
 }
